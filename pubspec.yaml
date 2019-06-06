@@ -1,4 +1,4 @@
-name: flutter_study1
+name: flutter_study
 description: A new Flutter application.
 
 # The following defines the version and build number for your application.
@@ -39,6 +39,16 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  assets:
+    - images/icon_find.png
+    - images/icon_find_select.png
+    - images/icon_home.png
+    - images/icon_home_select.png
+    - images/icon_mine.png
+    - images/icon_mine_select.png
+    - images/bg_advertising.jpg
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:

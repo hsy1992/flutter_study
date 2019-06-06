@@ -1,4 +1,4 @@
-package com.endless.flutter_study1;
+package com.endless.flutter_study;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
