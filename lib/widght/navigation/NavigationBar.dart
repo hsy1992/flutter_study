@@ -10,6 +10,8 @@ class NavigationBarBuilder {
   var _tabImages = [];
   var _bodys = [];
 
+  OnSearchClickListener _listener;
+
   NavigationBarBuilder setDefaultTextColor(Color defaultColor) {
     this._defaultTextColor = defaultColor;
     return this;
@@ -17,6 +19,11 @@ class NavigationBarBuilder {
 
   NavigationBarBuilder setSelectTextColor(Color selectTextColor) {
     this._selectTextColor = selectTextColor;
+    return this;
+  }
+
+  NavigationBarBuilder setOnSearchListener(OnSearchClickListener listener) {
+    this._listener = listener;
     return this;
   }
 
@@ -59,6 +66,9 @@ class _NavigationViewState extends State<_NavigationView> {
         title: Text(
             builder._tabText[_tabIndex]
         ),
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.search), size: 20.0, onPressed: _onPressed),
+        ],
       ),
       body: builder._bodys[_tabIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -92,6 +102,16 @@ class _NavigationViewState extends State<_NavigationView> {
 
     return items;
   }
+
+  void _onPressed() {
+    if (builder._listener != null) {
+      builder._listener.onSearchClick();
+    }
+  }
+}
+
+abstract class OnSearchClickListener {
+  void onSearchClick();
 }
 
 

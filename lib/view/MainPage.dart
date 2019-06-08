@@ -7,8 +7,10 @@ import 'package:flutter_study/util/ImageUtil.dart';
 
 class MainPage extends StatelessWidget {
 
+
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       home: NavigationBarBuilder()
           .setDefaultTextColor(Color(0xff8a8a8a))
@@ -19,5 +21,7 @@ class MainPage extends StatelessWidget {
           .build(),
     );
   }
+
+
 
 }
