@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_study/BasePage.dart';
+import 'package:flutter_study/view/BasePage.dart';
 
 class HomePage extends BasePage {
 

@@ -67,7 +67,7 @@ class _NavigationViewState extends State<_NavigationView> {
             builder._tabText[_tabIndex]
         ),
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.search), size: 20.0, onPressed: _onPressed),
+          IconButton(icon: Icon(Icons.search), iconSize: 30.0, onPressed: _onPressed),
         ],
       ),
       body: builder._bodys[_tabIndex],
