@@ -30,6 +30,8 @@ dev_dependencies:
 
   #网络请求
   http: ^0.11.3+17
+  #banner图
+  flutter_swiper: 1.1.6
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec

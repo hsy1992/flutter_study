@@ -1,28 +1,30 @@
-import 'BaseBean.dart';
 
-class BannerBean extends BaseBean<List<BannerBean>> {
+class BannerBean {
 
-  String desc;
+  final String desc;
 
-  int id;
+  final int id;
 
-  String title;
+  final String title;
 
-  String imagePath;
+  final String imagePath;
 
-  int isVisible;
+  final int isVisible;
 
-  int order;
+  final int order;
 
-  int type;
+  final int type;
 
-  String url;
+  final String url;
+
+  BannerBean(this.desc, this.id, this.title, this.imagePath, this.isVisible, this.order, this.type, this.url);
 
   @override
   String toString() {
     return 'BannerBean{desc : $desc, id: $id, title: $title, imagePath: $imagePath, isVisible: $isVisible,'
         ' order: $order, type: $type, url: $url}';
   }
+
   //json序列化
   Map<String, dynamic> toJson() => {
     'desc': desc,
@@ -38,4 +40,5 @@ class BannerBean extends BaseBean<List<BannerBean>> {
   BannerBean.fromMap(Map<String, dynamic> map) : desc = map['desc'], id = map['id'], title = map['title'],
         imagePath = map['imagePath'], isVisible = map['isVisible'], order = map['order'],
         type = map['type'], url = map['url'];
+
 }

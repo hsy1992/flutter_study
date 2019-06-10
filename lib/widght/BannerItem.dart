@@ -15,7 +15,7 @@ class BannerItem extends StatefulWidget {
   }
 }
 
-class BannerItemState extends State<BannerItem> {
+class BannerItemState extends State<BannerItem> with SingleTickerProviderStateMixin{
 
   final BannerBean bannerBean;
   
