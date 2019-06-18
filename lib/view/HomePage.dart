@@ -36,32 +36,13 @@ class HomePageViewState extends State<HomePageView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: ListView(
-        children: <Widget>[
-          new Container(
-            width: MediaQuery.of(context).size.width,
-            height: 200.0,
-            child: Swiper(
-              itemCount: list.length == 0 ? 1 : list.length,
-              itemBuilder: _swiperBuilder,
-              scrollDirection: Axis.horizontal,
-              autoplay: true,
-              onTap: (index) => debugPrint('点击了第$index个'),
-              pagination: new SwiperPagination(
-                  builder: DotSwiperPaginationBuilder(
-                      color: Colors.black54,
-                      activeColor: Colors.white
-                  )
-              ),
-            ),
-          )
-        ],
-      ),
+      child: _buildHome(),
     );
   }
 
   //获取banner数据
   void _getBannerData() async {
+
     List<BannerBean> bannerBeans = await Api.getApi().getBannerData();
     if (bannerBeans != null) {
       print(bannerBeans);
@@ -79,6 +60,32 @@ class HomePageViewState extends State<HomePageView> {
       return Image.network(list[index].imagePath, fit: BoxFit.fill,);
     }
 
+  }
+
+  Widget _buildHome() {
+    return ListView.builder(
+      itemCount: 1,
+        itemBuilder: (context, i) {
+
+          return new Container(
+            width: MediaQuery.of(context).size.width,
+            height: 180.0,
+            child: Swiper(
+              itemCount: list.length == 0 ? 1 : list.length,
+              itemBuilder: _swiperBuilder,
+              scrollDirection: Axis.horizontal,
+              autoplay: true,
+              onTap: (index) => debugPrint('点击了第$index个'),
+              pagination: new SwiperPagination(
+                  builder: DotSwiperPaginationBuilder(
+                      color: Colors.black54,
+                      activeColor: Colors.white
+                  )
+              ),
+            ),
+          );
+        }
+      );
   }
 }
 

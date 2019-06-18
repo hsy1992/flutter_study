@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_study/model/BannerBean.dart';
 
 /// 首页banner图的 item
-
 class BannerItem extends StatefulWidget {
 
   final BannerBean bannerBean;

@@ -1,4 +1,5 @@
 
+
 class BannerBean {
 
   final String desc;
@@ -17,7 +18,7 @@ class BannerBean {
 
   final String url;
 
-  BannerBean(this.desc, this.id, this.title, this.imagePath, this.isVisible, this.order, this.type, this.url);
+  BannerBean({this.desc, this.id, this.title, this.imagePath, this.isVisible, this.order, this.type, this.url});
 
   @override
   String toString() {

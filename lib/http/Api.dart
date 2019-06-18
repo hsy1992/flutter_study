@@ -1,7 +1,7 @@
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:flutter_study/http/HttpRequest.dart';
 import 'package:flutter_study/constant/Constant.dart';
 import 'package:flutter_study/model/BannerBean.dart';
+
 ///http请求类
 
 // http.post 用来执行一个 HTTP POST 请求。   
@@ -18,12 +18,14 @@ class Api {
     if (api == null) {
       api = Api();
     }
+
     return api;
   }
 
+  ///获取首页banner
   Future<List<BannerBean>> getBannerData() async {
 
-    Map<String, dynamic> dataMap = await _httpGet(homeBanner);
+    Map<String, dynamic> dataMap = await HttpRequest.getRequest().httpGet(homeBannerUrl);
 
     if (dataMap != null) {
 
@@ -31,44 +33,15 @@ class Api {
 
         return (dataMap['list'] as List).map((bean) => BannerBean.fromMap(bean)).toList();
       }
+
+      return dataMap['data'];
     }
 
     return null;
   }
 
-  Future<Map<String, dynamic>> _httpGet(String url) async {
 
-    final response = await http.get(host + url);
-
-    if (response.statusCode == 200) {
-
-      Map<String, dynamic> dataJson = json.decode(response.body);
-
-      int errorCode = dataJson['errorCode'];
-
-      String errorMsg = dataJson['errorMsg'];
-
-      if (errorCode == 0) {
-
-        Map<String, dynamic> resultMap = {};
-
-        if (dataJson['data'] is List) {
-
-          resultMap['list'] = dataJson['data'];
-
-          return resultMap;
-        }
-
-        return dataJson['data'];
-
-      } else {
-
-        print('url>>>' + url + '  报错  ' + errorMsg);
-      }
-    }
-
-    return null;
-  }
 }
+
 
 
