@@ -22,25 +22,22 @@ class Api {
     return api;
   }
 
-  ///获取首页banner
-  Future<List<BannerBean>> getBannerData() async {
+  ///get 方法
+  void getData(url, {voidCallback(var result), voidCallbackList(var result)}) async {
 
-    Map<String, dynamic> dataMap = await HttpRequest.getRequest().httpGet(homeBannerUrl);
+    Map<String, dynamic> dataMap = await HttpRequest.getRequest().httpGet(url);
 
     if (dataMap != null) {
 
       if (dataMap['list'] != null) {
 
-        return (dataMap['list'] as List).map((bean) => BannerBean.fromMap(bean)).toList();
+        voidCallbackList(dataMap['list']);
+      } else {
+
+        voidCallback(dataMap['data']);
       }
-
-      return dataMap['data'];
     }
-
-    return null;
   }
-
-
 }
 
 

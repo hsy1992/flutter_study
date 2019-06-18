@@ -46,6 +46,8 @@ class HttpRequest {
 
         Map<String, dynamic> resultMap = {};
 
+
+
         if (dataJson['data'] is List) {
 
           resultMap['list'] = dataJson['data'];
