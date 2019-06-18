@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_study/model/article_bean_entity.dart';
 
 ///首页item
 class HomeItem extends StatelessWidget {
 
-  ArticleBeanEntity entity;
+  final ArticleBeanEntity entity;
 
   HomeItem(this.entity);
 
