@@ -15,7 +15,7 @@ class WarmPainter extends BasePainter {
     //距离
     double distance = size + space;
     //开始绘制的地点
-    double start = index * distance
+    double start = index * distance;
 
     if (progress > 0.5) {
 

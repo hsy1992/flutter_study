@@ -32,6 +32,12 @@ dev_dependencies:
   http: ^0.11.3+17
   #banner图
   flutter_swiper: 1.1.6
+  #数据库
+  sqflite: any
+  #文件地址
+  path_provider: ^0.4.1
+  #首选项
+  shared_preferences: ^0.4.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
