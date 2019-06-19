@@ -27,6 +27,7 @@ class Api {
 
     Map<String, dynamic> dataMap = await HttpRequest.getRequest().httpGet(url);
 
+    print(dataMap);
     if (dataMap != null) {
 
       if (dataMap['list'] != null) {

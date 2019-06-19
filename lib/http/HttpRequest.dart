@@ -52,10 +52,12 @@ class HttpRequest {
 
           resultMap['list'] = dataJson['data'];
 
-          return resultMap;
+        } else {
+
+          resultMap['data'] = dataJson['data'];
         }
 
-        return dataJson['data'];
+        return resultMap;
 
       } else {
 

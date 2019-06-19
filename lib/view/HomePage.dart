@@ -9,6 +9,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_study/widght/HomeItem.dart';
 import 'package:flutter_study/entity_factory.dart';
 import 'package:flutter_study/model/article_bean_entity.dart';
+import 'package:flutter_study/widght/load_waiting.dart';
 
 class HomePage extends BasePage {
 
@@ -28,19 +29,20 @@ class HomePageViewState extends State<HomePageView> {
 
   List<BannerBean> list = [];
 
-  List<ArticleBeanEntity> articles = [];
+  List<ArticleBeanData> _articles = [];
 
   //滑动控制器
   ScrollController _scrollController = ScrollController();
 
   bool isPerformingRequest = false; // 是否有请求正在进行
 
+  int page = 0;
+
   @override
   void initState() {
     super.initState();
 
     Future(_getBannerData);
-
     _scrollController.addListener((){
       if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
         _getHomeArticleData();
@@ -63,8 +65,12 @@ class HomePageViewState extends State<HomePageView> {
       
       if (result != null && result is List) {
 
-        list = result.map((bean) => BannerBean.fromMap(bean)).toList();
+        setState(() {
+          list = result.map((bean) => BannerBean.fromMap(bean)).toList();
+        });
+
       }
+      Future(_getHomeArticleData);
     });
   }
 
@@ -82,12 +88,15 @@ class HomePageViewState extends State<HomePageView> {
 
     return ListView.builder(
       controller: _scrollController,
-      itemCount: articles.length + 1,
+      itemCount: _articles.length + 2,
       itemBuilder: (context, i) {
+
+        print(_articles.length);
 
         if (i == 0) {
 
           return new Container(
+
             width: MediaQuery.of(context).size.width,
             height: 180.0,
             child: Swiper(
@@ -104,9 +113,12 @@ class HomePageViewState extends State<HomePageView> {
               ),
             ),
           );
+        } else if (_articles.length + 1 == i) {
+
+          return buildProgressIndicator(isPerformingRequest);
         } else {
 
-          return HomeItem(articles[i]);
+          return HomeItem(_articles[i - 1]);
         }
 
       }
@@ -122,15 +134,19 @@ class HomePageViewState extends State<HomePageView> {
         isPerformingRequest = true;
       });
 
-      Api.getApi().getData(homeArticleUrl, voidCallbackList: (result) {
+      String requestUrl = homeArticleUrl + "/" + page.toString() + "/json";
 
-        if (result != null && result is List) {
+      //发起网络请求
+      Api.getApi().getData(requestUrl, voidCallback: (result) {
 
-          articles = EntityFactory.generateOBJ(result);
-          print(articles);
+        if (result != null) {
+
+          //json转化为对象
+          ArticleBeanEntity articleBeanEntity = EntityFactory.generateOBJ(result);
+
 
           //没有数据时动画
-          if (articles.isEmpty) {
+          if (articleBeanEntity.datas.isEmpty) {
             double edge = 50.0;
             double offsetFromBottom = _scrollController.position.maxScrollExtent - _scrollController.position.pixels;
 
@@ -142,8 +158,14 @@ class HomePageViewState extends State<HomePageView> {
             }
           }
 
+          //没有下一页了
+          if (!articleBeanEntity.over) {
+            page++;
+          }
+
+          //改变状态
           setState(() {
-            articles.addAll(articles);
+            _articles.addAll(articleBeanEntity.datas);
             isPerformingRequest = false;
           });
         }
