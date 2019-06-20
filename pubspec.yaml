@@ -58,6 +58,7 @@ flutter:
     - images/icon_mine.png
     - images/icon_mine_select.png
     - images/bg_advertising.jpg
+    - images/logo.png
 
 
   # To add assets to your application, add an assets section, like this:

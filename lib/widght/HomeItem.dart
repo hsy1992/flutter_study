@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_study/model/article_bean_entity.dart';
+import 'package:flutter_study/util/check_status.dart';
+
 
 ///首页item
 class HomeItem extends StatefulWidget {
@@ -33,35 +35,47 @@ class HomeItemState extends State<HomeItem> {
           boxShadow: [new BoxShadow(color: Colors.grey, offset: Offset(0.0, 2.0)),
             new BoxShadow(color: Colors.grey, offset: Offset(0.0, -0.5))]
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Row(
+      child: GestureDetector(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text("作者："),
-              Expanded(child: Text(entity.author, style: TextStyle(color: Colors.blue))),
-              Text(entity.niceDate),
-            ],
-          ),
-          Container(
-            alignment: Alignment.centerLeft,
-            margin: const EdgeInsets.only(top: 20.0),
-            child: Text(entity.title, overflow: TextOverflow.ellipsis, maxLines: 1,),
-          ),
-          Row(
-            children: <Widget>[
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.only(top: 20.0),
-                  child: Text(entity.chapterName, style: TextStyle(color: Colors.blue),),
-                ),
+              Row(
+                children: <Widget>[
+                  Text("作者："),
+                  Expanded(child: Text(entity.author, style: TextStyle(color: Colors.blue))),
+                  Text(entity.niceDate),
+                ],
               ),
-              Icon(Icons.favorite, color: entity.collect ? Colors.red : Colors.grey)
+              Container(
+                alignment: Alignment.centerLeft,
+                margin: const EdgeInsets.only(top: 20.0),
+                child: Text(entity.title, overflow: TextOverflow.ellipsis, maxLines: 1,),
+              ),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 20.0),
+                      child: Text(entity.chapterName, style: TextStyle(color: Colors.blue),),
+                    ),
+                  ),
+                  GestureDetector(child: Icon(Icons.favorite, color: entity.collect ? Colors.red : Colors.grey), onTap: _onCollect,)
+                ],
+              )
             ],
-          )
-        ],
-      ),
+          ), onTap: _onItemClick,
+      )
     );
+  }
+
+  void _onCollect() {
+
+    print(entity.title);
+    checkLogin(context);
+  }
+
+  void _onItemClick() {
+    print('item_click');
   }
 }
