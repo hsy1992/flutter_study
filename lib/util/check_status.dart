@@ -4,6 +4,6 @@ import 'package:flutter_study/view/login_page.dart';
 
 void checkLogin(context) {
 
-  Router.getInstance().startPage(context, LoginPage());
+  Router.getInstance().startPage(context, LoginPage(0));
 
 }
