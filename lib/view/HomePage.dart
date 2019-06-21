@@ -25,7 +25,7 @@ class HomePageView extends StatefulWidget {
   }
 }
 
-class HomePageViewState extends State<HomePageView> {
+class HomePageViewState extends State<HomePageView> with AutomaticKeepAliveClientMixin {
 
   List<BannerBean> list = [];
 
@@ -50,6 +50,8 @@ class HomePageViewState extends State<HomePageView> {
     });
   }
 
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {

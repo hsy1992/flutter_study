@@ -184,6 +184,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.2.4"
+  toast:
+    dependency: "direct dev"
+    description:
+      name: toast
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.4"
   transformer_page_view:
     dependency: transitive
     description:

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_study/util/router_jump.dart';
+import 'package:toast/toast.dart';
+import 'package:flutter_study/http/Api.dart';
+import 'package:flutter_study/constant/Constant.dart';
+import 'package:flutter_study/entity_factory.dart';
+import 'package:flutter_study/model/user_bean_entity.dart';
 ///0 登录页面 1注册
 class LoginPage extends StatelessWidget {
 
@@ -118,6 +123,47 @@ class LoginPageState extends State<LoginPageView> {
   }
 
   void _login() {
+
+    checkParms(() {
+
+      if (type == 0) {
+        //登录
+        Map<String, String> map = {};
+        map['username'] = accountController.text;
+        map['password'] = passwordController.text;
+        Api.getApi().postData(loginUrl, parameters: map, voidCallback: (result){
+          //登录成功
+          UserBeanEntity userBeanEntity = EntityFactory.generateOBJ(map);
+          print(userBeanEntity);
+          Navigator.pop(context);
+          Toast.show('登录成功', context);
+        });
+
+      } else {
+        //注册
+        Map<String, String> map = {};
+        map['username'] = accountController.text;
+        map['password'] = passwordController.text;
+        map['repassword'] = passwordController.text;
+        Api.getApi().postData(registerUrl, parameters: map, voidCallback: (result){
+          //注册
+          Navigator.pop(context);
+          Toast.show('注册成功', context);
+        });
+      }
+    });
+
+  }
+
+  void checkParms(callBack) {
+    //登录
+    if (accountController.text == null || accountController.text.length == 0) {
+      Toast.show('请输入账号', context);
+    } else if (passwordController.text == null || passwordController.text.length == 0) {
+      Toast.show('请输入密码', context);
+    } else {
+      callBack();
+    }
   }
 
   void _register() {

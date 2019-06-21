@@ -1,6 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_study/constant/Constant.dart';
+import 'package:toast/toast.dart';
 
 class HttpRequest {
 
@@ -61,7 +62,7 @@ class HttpRequest {
 
       } else {
 
-        print('url>>>' + response.request.url + ' 报错  ' + errorMsg);
+        print('url>>>' + response.request.url.toString() + ' 报错  ' + errorMsg);
       }
     }
 

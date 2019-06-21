@@ -23,9 +23,27 @@ class Api {
   }
 
   ///get 方法
-  void getData(url, {voidCallback(var result), voidCallbackList(var result)}) async {
+  void getData(url, {voidCallback(var result), voidCallbackList(var result), Map<String, dynamic> parameters}) async {
 
-    Map<String, dynamic> dataMap = await HttpRequest.getRequest().httpGet(url);
+    Map<String, dynamic> dataMap = await HttpRequest.getRequest().httpGet(url, parameters: parameters);
+
+    print(dataMap);
+    if (dataMap != null) {
+
+      if (dataMap['list'] != null) {
+
+        voidCallbackList(dataMap['list']);
+      } else {
+
+        voidCallback(dataMap['data']);
+      }
+    }
+  }
+
+  ///post 方法
+  void postData(url, {voidCallback(var result), voidCallbackList(var result), Map<String, dynamic> parameters}) async {
+
+    Map<String, dynamic> dataMap = await HttpRequest.getRequest().httpPost(url, parameters: parameters);
 
     print(dataMap);
     if (dataMap != null) {
